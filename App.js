@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'native-base';
-import DatePicker from 'react-native-datepicker'
+import DatePicker from 'react-native-datepicker';
 import * as Permissions from 'expo-permissions';
-
+import ConnectionImage from './components/ImagePicker';
 
 /**
  * Connection edit/view screen:
@@ -37,6 +37,7 @@ export default function App() {
 	return (
 		<View style={styles.container}>
 			<Text>Open up App.js to start working on your app!</Text>
+			<ConnectionImage />
 		</View>
 	);
 }

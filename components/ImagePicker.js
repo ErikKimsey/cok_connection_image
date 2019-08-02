@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
 
-export default class ImagePicker extends Component {
+export default class ConnectionImage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -40,9 +41,31 @@ export default class ImagePicker extends Component {
        * -- Image
        * ---- ImagePicker
        */
-			<View>
-				<Text>IMAGE PICKER</Text>
-			</View>
+
+			<TouchableOpacity style={styles.btn}>
+				<View style={styles.absoluteView}>
+					<Text>WHAT?</Text>
+				</View>
+				<Image source={require('../assets/grunge_chicks.jpeg')} style={styles.img} />
+			</TouchableOpacity>
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+	absoluteView: {
+		flex: 1,
+		position: 'absolute',
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: 'transparent'
+	},
+	img: {
+		width: 200,
+		height: 200
+	},
+	btn: {
+		width: 200,
+		height: 200
+	}
+});
