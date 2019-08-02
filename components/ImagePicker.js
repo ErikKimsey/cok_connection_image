@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
+const grunge = require('../assets/grunge_chicks.jpeg');
 
 export default class ConnectionImage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			hasCameraPermission: false
+			hasCameraPermission: false,
+			image: null,
+			initImage: '../assets/grunge_chicks.jpeg'
 		};
 	}
 
@@ -27,26 +30,20 @@ export default class ConnectionImage extends Component {
 			aspect: [ 4, 3 ]
 		});
 
-		console.log(result);
-
 		if (!result.cancelled) {
 			this.setState({ image: result.uri });
 		}
+		console.log(this.state.image);
 	};
 
 	render() {
+		const { image } = this.state;
 		return (
-			/**
-       * View
-       * -- Image
-       * ---- ImagePicker
-       */
-
-			<TouchableOpacity style={styles.btn}>
+			<TouchableOpacity style={styles.btn} onPress={this._pickImage}>
 				<View style={styles.absoluteView}>
 					<Text>WHAT?</Text>
 				</View>
-				<Image source={require('../assets/grunge_chicks.jpeg')} style={styles.img} />
+				{image && <Image source={image} style={styles.img} />}
 			</TouchableOpacity>
 		);
 	}
@@ -57,15 +54,16 @@ const styles = StyleSheet.create({
 		flex: 1,
 		position: 'absolute',
 		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: 'transparent'
+		justifyContent: 'center'
 	},
 	img: {
 		width: 200,
-		height: 200
+		height: 200,
+		backgroundColor: 'gray'
 	},
 	btn: {
 		width: 200,
-		height: 200
+		height: 200,
+		backgroundColor: '#dddddd'
 	}
 });
