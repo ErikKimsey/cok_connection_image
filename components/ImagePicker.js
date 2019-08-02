@@ -43,7 +43,7 @@ export default class ConnectionImage extends Component {
 				<View style={styles.absoluteView}>
 					<Text>WHAT?</Text>
 				</View>
-				{image && <Image source={image} style={styles.img} />}
+				{image && <Image source={{ uri: image }} style={styles.img} />}
 			</TouchableOpacity>
 		);
 	}
