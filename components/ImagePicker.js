@@ -18,7 +18,6 @@ export default class ConnectionImage extends Component {
 
 	componentDidMount() {
 		this.getPermissions();
-		// await this.setState({ image: '../assets/add.png' });
 	}
 
 	getPermissions = async () => {
@@ -56,7 +55,11 @@ export default class ConnectionImage extends Component {
 				<TouchableOpacity style={styles.btn} onPress={this._pickImage}>
 					<View style={styles.absoluteView}>
 						{/* <Text style={styles.addText}>+</Text> */}
-						<Image source={add} style={[ styles.img, { width: 100, height: 100, opacity:0.4 } ]} resizeMode="cover" />
+						<Image
+							source={add}
+							style={[ styles.img, { width: 100, height: 100, opacity: 0.4 } ]}
+							resizeMode="cover"
+						/>
 					</View>
 					{/* {image && <Image source={{ uri: add }} style={styles.img} />} */}
 				</TouchableOpacity>
@@ -87,7 +90,7 @@ const styles = StyleSheet.create({
 		height: 200,
 		borderRadius: 30,
 		borderWidth: 2,
-		borderColor: GLOBAL_STYLES.highlightBlue,
+		borderColor: 'rgba(0,0,0,0.4)',
 		backgroundColor: 'transparent',
 		justifyContent: 'center',
 		alignItems: 'center'
