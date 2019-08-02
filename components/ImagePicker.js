@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 const grunge = require('../assets/grunge_chicks.jpeg');
+const add = require('../assets/add.png');
 
 export default class ConnectionImage extends Component {
 	constructor(props) {
@@ -16,6 +17,7 @@ export default class ConnectionImage extends Component {
 
 	componentDidMount() {
 		this.getPermissions();
+		// await this.setState({ image: '../assets/add.png' });
 	}
 
 	getPermissions = async () => {
@@ -33,15 +35,16 @@ export default class ConnectionImage extends Component {
 		if (!result.cancelled) {
 			this.setState({ image: result.uri });
 		}
-		console.log(this.state.image);
 	};
 
 	render() {
 		const { image } = this.state;
+		console.log('iamge');
+		console.log(image);
 		return (
 			<TouchableOpacity style={styles.btn} onPress={this._pickImage}>
 				<View style={styles.absoluteView}>
-					<Text>WHAT?</Text>
+					<Text style={styles.addText}>+</Text>
 				</View>
 				{image && <Image source={{ uri: image }} style={styles.img} />}
 			</TouchableOpacity>
@@ -56,14 +59,18 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center'
 	},
+	addText: {
+		fontSize: 92,
+		textAlign: 'center'
+	},
 	img: {
 		width: 200,
-		height: 200,
-		backgroundColor: 'gray'
+		height: 200
+		// backgroundColor: '#5d0000'
 	},
 	btn: {
 		width: 200,
 		height: 200,
-		backgroundColor: '#dddddd'
+		backgroundColor: 'transparent'
 	}
 });
