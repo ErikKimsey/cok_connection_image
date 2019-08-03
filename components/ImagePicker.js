@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import GLOBAL_STYLES from '../styles/global_styles';
+import ImagePickCamGalModal from '../components/ImagePickCamGal';
 const grunge = require('../assets/grunge_chicks.jpeg');
 const add = require('../assets/add-user.png');
 
@@ -12,13 +13,23 @@ export default class ConnectionImage extends Component {
 		this.state = {
 			hasCameraPermission: false,
 			image: null,
-			initImage: '../assets/grunge_chicks.jpeg'
+			initImage: '../assets/grunge_chicks.jpeg',
+			modalVisible: false
 		};
 	}
 
 	componentDidMount() {
 		this.getPermissions();
 	}
+
+	setModalVisible = (visible) => {
+		this.setState({ modalVisible: visible });
+	};
+
+	handleMobileVisibility = (vis) => {
+		this.setState({ modalVisible: vis });
+		console.log(this.state.modalVisible);
+	};
 
 	getPermissions = async () => {
 		const { status } = await Permissions.askAsync(Permissions.CAMERA, Permissions.CAMERA_ROLL);
@@ -41,18 +52,23 @@ export default class ConnectionImage extends Component {
 		const { image } = this.state;
 		if (image) {
 			return (
-				<TouchableOpacity style={styles.btn} onPress={this._pickImage}>
+				<TouchableOpacity style={styles.btn} onPress={this.setModalVisible}>
 					<View style={styles.absoluteView}>
 						<Text style={styles.addText}>+</Text>
+						<ImagePickCamGalModal modalVisible={this.state.modalVisible} />
 					</View>
 					{image && <Image source={{ uri: image }} style={styles.img} />}
 				</TouchableOpacity>
 			);
 		} else {
 			return (
-				<TouchableOpacity style={styles.btn} onPress={this._pickImage}>
+				<TouchableOpacity style={styles.btn} onPress={this.setModalVisible}>
 					<View style={styles.absoluteView}>
 						{/* <Text style={styles.addText}>+</Text> */}
+						<ImagePickCamGalModal
+							modalVisible={this.state.modalVisible}
+							handleMobileVisibility={this.handleMobileVisibility}
+						/>
 						<Image
 							source={add}
 							style={[ styles.img, { width: 100, height: 100, opacity: 0.4 } ]}
