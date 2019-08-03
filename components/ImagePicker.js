@@ -39,8 +39,6 @@ export default class ConnectionImage extends Component {
 
 	render() {
 		const { image } = this.state;
-		console.log('iamge');
-		console.log(image);
 		if (image) {
 			return (
 				<TouchableOpacity style={styles.btn} onPress={this._pickImage}>
